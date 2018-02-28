@@ -7,14 +7,33 @@ import akcscLogo from "./img/logo-akcsc.png";
 import arlisLogo from "./img/logo-arlis.png";
 import nwbLogo from "./img/logo-nwb.png";
 
+
+const ITEMS_PER_PAGE = 20; //TODO: consider making this a variable
+
+
 class App extends Component {
   doSearch = () => {
     console.log("doing search", this.input.value);
-    this.props.querySB(this.input.value);
+
+    // TODO: hook up offset to pagination
+    const page = 2;
+    this.props.querySB(this.input.value, page * ITEMS_PER_PAGE, ITEMS_PER_PAGE);
   };
 
+  handleKeyPress = (e) => {
+      if (e.key === "Enter"){
+        this.doSearch();
+      }
+  }
+
+  handlePageClick = (props) => {
+      console.log('page click', props)
+  }
+
   renderList() {
-    const { items, isPending, isError } = this.props;
+    const { items, total, page, isPending, isError } = this.props;
+    const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+    const onPage = this.handlePageClick; // TODO: replace with action
 
     if (isError) {
       return (
@@ -34,7 +53,7 @@ class App extends Component {
       return <div className="quiet">No items match your query.</div>
     }
 
-    return <List items={items} />;
+    return <List items={items} total={total} page={page} totalPages={totalPages} onPage={onPage}/>;
   }
 
   render() {
@@ -50,14 +69,15 @@ class App extends Component {
               this.input = i;
             }}
             type="text"
+            onKeyPress={e => this.handleKeyPress(e)}
           />
           <button onClick={this.doSearch}>Search</button>
         </div>
 
         <div className="columns">
-          <div className="column">
+          {/* <div className="column">
             <Map />
-          </div>
+          </div> */}
 
           <div className="column">
             <p>

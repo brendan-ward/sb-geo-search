@@ -34,9 +34,32 @@ body {
   height: 300px;
 }
 
+.items-section {
+  padding: 1rem 0 !important;
+}
 
+.items-list {
+
+}
+
+.item {
+
+}
 
 .item-title {
   font-size: 1.1em;
   font-weight: bold;
+}
+
+.count {
+  border-bottom: 1px solid #DDD;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.pagination {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #DDD;
 }
