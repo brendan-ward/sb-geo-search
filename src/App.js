@@ -1,16 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Map from "./components/Map";
 import List from "./components/List";
+import { querySB } from "./reducers";
 import akcscLogo from "./img/logo-akcsc.png";
 import arlisLogo from "./img/logo-arlis.png";
 import nwbLogo from "./img/logo-nwb.png";
 
 class App extends Component {
-
   doSearch = () => {
-    console.log("doing search", this.input.value)
-  }
+    console.log("doing search", this.input.value);
+    this.props.querySB(this.input.value);
+  };
 
+  renderList() {
+    const { items, isPending, isError } = this.props;
+
+    if (isError) {
+      return (
+        <div className="alert">
+          We're sorry, there was an error retrieving results from ScienceBase.
+        </div>
+      );
+    }
+
+    if (isPending) {
+      return <div className="quiet">Loading...</div>;
+    }
+
+    if (items === null) return null;
+
+    if (items.length === 0) {
+      return <div className="quiet">No items match your query.</div>
+    }
+
+    return <List items={items} />;
+  }
 
   render() {
     return (
@@ -20,7 +45,12 @@ class App extends Component {
         </h2>
 
         <div id="Search">
-          <input ref={(i) => {this.input = i}} type="text" />
+          <input
+            ref={i => {
+              this.input = i;
+            }}
+            type="text"
+          />
           <button onClick={this.doSearch}>Search</button>
         </div>
 
@@ -45,7 +75,7 @@ class App extends Component {
               <br />
               <br />
               Contact{" "}
-              <a target="_blank" href="mailto:benjamin_matheson@fws.gov">
+              <a href="mailto:benjamin_matheson@fws.gov">
                 benjamin_matheson@fws.gov
               </a>{" "}
               with any questions.
@@ -53,21 +83,39 @@ class App extends Component {
           </div>
         </div>
 
-        <List />
+        {this.renderList()}
 
         <hr />
 
         <div id="Partners">
           <h3 className="is-size-3">Contributing Partners</h3>
           <div>
-            <a href="https://csc.alaska.edu/" target="_blank">
-              <img src={akcscLogo} />
+            <a
+              href="https://csc.alaska.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={akcscLogo} alt="Alaska Climate Science Center logo" />
             </a>
-            <a href="http://nwblcc.org/" target="_blank">
-              <img src={nwbLogo} />
+            <a
+              href="http://nwblcc.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={nwbLogo}
+                alt="Northwest Boreal Landscape Conservation Cooperative logo"
+              />
             </a>
-            <a href="https://www.arlis.org" target="_blank">
-              <img src={arlisLogo} />
+            <a
+              href="https://www.arlis.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={arlisLogo}
+                alt="Alaska Resources Library and Information Services logo"
+              />
             </a>
           </div>
         </div>
@@ -76,4 +124,6 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => state;
+
+export default connect(mapStateToProps, { querySB })(App);

@@ -1,7 +1,11 @@
 import React from "react";
+import Item from "./Item";
 
-const List = () => {
-  return <div>List goes here</div>;
+
+const List = ({items}) => {
+  return (
+    items.map(item => <Item key={item.id} {...item}/>)
+  );
 };
 
 export default List;
