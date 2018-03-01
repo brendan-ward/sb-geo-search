@@ -15,9 +15,10 @@ class App extends Component {
   doSearch = () => {
     console.log("doing search", this.input.value);
 
-    // TODO: hook up offset to pagination
-    const page = 2;
-    this.props.querySB(this.input.value, page * ITEMS_PER_PAGE, ITEMS_PER_PAGE);
+    const {page} = this.props;
+
+    // TODO: geo search params
+    this.props.querySB(this.input.value, page, ITEMS_PER_PAGE);
   };
 
   handleKeyPress = (e) => {
@@ -26,8 +27,8 @@ class App extends Component {
       }
   }
 
-  handlePageClick = (props) => {
-      console.log('page click', props)
+  handlePageClick = (page) => {
+      this.props.querySB(this.input.value, page, ITEMS_PER_PAGE);
   }
 
   renderList() {
@@ -53,7 +54,7 @@ class App extends Component {
       return <div className="quiet">No items match your query.</div>
     }
 
-    return <List items={items} total={total} page={page} totalPages={totalPages} onPage={onPage}/>;
+    return <List items={items} total={total} page={page} totalPages={totalPages} itemsPerPage={ITEMS_PER_PAGE} onPage={onPage}/>;
   }
 
   render() {
@@ -79,7 +80,7 @@ class App extends Component {
             <Map />
           </div> */}
 
-          <div className="column">
+          {/* <div className="column">
             <p>
               Explore thousands of curated scholarly articles, state and federal
               resource reports, land management plans, and more in the Northwest
@@ -100,14 +101,14 @@ class App extends Component {
               </a>{" "}
               with any questions.
             </p>
-          </div>
+          </div> */}
         </div>
 
         {this.renderList()}
 
         <hr />
 
-        <div id="Partners">
+        {/* <div id="Partners">
           <h3 className="is-size-3">Contributing Partners</h3>
           <div>
             <a
@@ -138,7 +139,7 @@ class App extends Component {
               />
             </a>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -10,14 +10,11 @@ body {
   margin: 0 6px 10px 0;
 }
 
-
-
-
 #Partners {
   text-align: center;
 }
 
-#Partners > div {
+#Partners>div {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -38,13 +35,9 @@ body {
   padding: 1rem 0 !important;
 }
 
-.items-list {
+.items-list {}
 
-}
-
-.item {
-
-}
+.item {}
 
 .item-title {
   font-size: 1.1em;
@@ -62,4 +55,9 @@ body {
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #DDD;
+}
+
+.pagination-previous,
+.pagination-next {
+  flex-grow: 0 !important;
 }
