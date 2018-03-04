@@ -8,7 +8,8 @@ import arlisLogo from "./img/logo-arlis.png";
 import nwbLogo from "./img/logo-nwb.png";
 
 
-const ITEMS_PER_PAGE = 20; //TODO: consider making this a variable
+export const ITEMS_PER_PAGE = 20; //TODO: consider making this a variable
+export const SB_FOLDER_ID = '57856a9fe4b0e02680bf7784';
 
 
 class App extends Component {

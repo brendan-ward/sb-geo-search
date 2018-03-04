@@ -7,11 +7,17 @@ import axiosMiddleware from "redux-axios-middleware";
 import rootReducer from "./reducers";
 import "bulma/css/bulma.css";
 import "./core.css";
-import App from "./App";
+import App, {ITEMS_PER_PAGE, SB_FOLDER_ID} from "./App";
 
 const client = axios.create({
   baseURL: "https://www.sciencebase.gov/catalog/items",
-  responseType: "json"
+  responseType: "json",
+  params: {
+    fields: 'title,summary,previewImage,browseCategories,hasChildren',
+    format: 'json',
+    max: ITEMS_PER_PAGE,
+    folderId: SB_FOLDER_ID
+  }
 });
 
 let store = createStore(rootReducer, applyMiddleware(axiosMiddleware(client)));
