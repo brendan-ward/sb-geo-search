@@ -66,8 +66,7 @@ class Map extends Component {
 
     map.on('draw:created', (e) => {
       const layer = e.layer;
-      drawing.addLayer(layer)
-      console.log(layer);
+      drawing.addLayer(layer);
       const bounds = layer.getBounds();
 
       // return bounds in format expected by ScienceBase: [[xmin, ymin], [xmax, ymax]]

@@ -6,7 +6,7 @@ const Pagination = ({ page, totalPages, onPage }) => {
 
   const halfRange = Math.floor((MAX_PAGE_BUTTONS - 1) / 2);
   let seriesStart = 1;
-  if (page > totalPages - MAX_PAGE_BUTTONS) {
+  if (totalPages > MAX_PAGE_BUTTONS && page > totalPages - MAX_PAGE_BUTTONS) {
     seriesStart = totalPages - MAX_PAGE_BUTTONS;
   }
   else if (page >= MAX_PAGE_BUTTONS) {
