@@ -8,11 +8,25 @@ a, a:hover {
   color: #3273dc;
 }
 
+#Search {
+  background: #F6F6F2;
+  border-radius: 6px;
+}
+
 #Search input {
   width: 300px;
   font-size: 16px;
   margin: 0 6px 10px 0;
+  outline: none;
+  padding: 2px 4px;
 }
+
+#Search button {
+  font-size: 1.1em;
+  border-radius: 6px;
+  outline: none;
+}
+
 
 #Partners {
   text-align: center;
@@ -31,8 +45,10 @@ a, a:hover {
 }
 
 .map-container {
-  width: 500px;
+  width: 100%;
+  min-width: 350px;
   height: 300px;
+  border: 1px solid #AAA;
 }
 
 .items-section {
