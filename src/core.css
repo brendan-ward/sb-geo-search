@@ -111,3 +111,9 @@ a .item-title:hover {
 .pagination-next {
   flex-grow: 0 !important;
 }
+
+/* hide the draw menus, we don't need them and they are in the way */
+.leaflet-draw-actions {
+  display: none !important;
+}
+

@@ -7,7 +7,9 @@ import axiosMiddleware from "redux-axios-middleware";
 import rootReducer from "./reducers";
 import "bulma/css/bulma.css";
 import "./core.css";
-import App, {ITEMS_PER_PAGE, SB_FOLDER_ID} from "./App";
+import App from "./App";
+import {ITEMS_PER_PAGE, SB_FOLDER_ID} from './config';
+
 
 const client = axios.create({
   baseURL: "https://www.sciencebase.gov/catalog/items",

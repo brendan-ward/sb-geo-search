@@ -2,34 +2,32 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Map from "./components/Map";
 import List from "./components/List";
-import { querySB } from "./reducers";
+import { querySB, setExtent } from "./reducers";
+import {ITEMS_PER_PAGE} from './config';
 import akcscLogo from "./img/logo-akcsc.png";
 import arlisLogo from "./img/logo-arlis.png";
 import nwbLogo from "./img/logo-nwb.png";
-
-
-export const ITEMS_PER_PAGE = 20; //TODO: consider making this a variable
-export const SB_FOLDER_ID = '57856a9fe4b0e02680bf7784';
 
 
 class App extends Component {
   doSearch = () => {
     console.log("doing search", this.input.value);
 
-    const {page} = this.props;
-
-    // TODO: geo search params
-    this.props.querySB(this.input.value, page, ITEMS_PER_PAGE);
+    const {extent} = this.props;
+    // always start a new search from page 1
+    this.props.querySB(this.input.value, extent, 1, ITEMS_PER_PAGE);
   };
 
   handleKeyPress = (e) => {
-      if (e.key === "Enter"){
-        this.doSearch();
-      }
+    if (e.key === "Enter"){
+      this.doSearch();
+    }
   }
 
   handlePageClick = (page) => {
-      this.props.querySB(this.input.value, page, ITEMS_PER_PAGE);
+    // TODO: geo search params
+    const {extent} = this.props;
+    this.props.querySB(this.input.value, extent, page, ITEMS_PER_PAGE);
   }
 
   renderList() {
@@ -77,11 +75,11 @@ class App extends Component {
         </div>
 
         <div className="columns">
-          {/* <div className="column">
-            <Map />
-          </div> */}
+          <div className="column">
+            <Map onSetExtent={this.props.setExtent}/>
+          </div>
 
-          {/* <div className="column">
+          <div className="column">
             <p>
               Explore thousands of curated scholarly articles, state and federal
               resource reports, land management plans, and more in the Northwest
@@ -102,14 +100,14 @@ class App extends Component {
               </a>{" "}
               with any questions.
             </p>
-          </div> */}
+          </div>
         </div>
 
         {this.renderList()}
 
         <hr />
 
-        {/* <div id="Partners">
+        <div id="Partners">
           <h3 className="is-size-3">Contributing Partners</h3>
           <div>
             <a
@@ -140,7 +138,7 @@ class App extends Component {
               />
             </a>
           </div>
-        </div> */}
+        </div>
       </div>
     );
   }
@@ -148,4 +146,4 @@ class App extends Component {
 
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, { querySB })(App);
+export default connect(mapStateToProps, { querySB, setExtent })(App);
