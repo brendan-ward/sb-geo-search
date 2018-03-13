@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Map from "./components/Map";
 import List from "./components/List";
 import {querySB, setExtent} from "./reducers";
-import {ITEMS_PER_PAGE} from './config';
+import {ITEMS_PER_PAGE, SB_FOLDER_ID} from './config';
 import akcscLogo from "./img/logo-akcsc.png";
 import arlisLogo from "./img/logo-arlis.png";
 import nwbLogo from "./img/logo-nwb.png";
@@ -16,7 +16,7 @@ class App extends Component {
     // always start a new search from page 1
     this
       .props
-      .querySB(this.input.value, extent, 1, ITEMS_PER_PAGE);
+      .querySB(this.input.value, extent, 1, ITEMS_PER_PAGE, SB_FOLDER_ID);
   };
 
   handleKeyPress = (e) => {
@@ -30,7 +30,7 @@ class App extends Component {
     const {extent} = this.props;
     this
       .props
-      .querySB(this.input.value, extent, page, ITEMS_PER_PAGE);
+      .querySB(this.input.value, extent, page, ITEMS_PER_PAGE, SB_FOLDER_ID);
   }
 
   renderList() {
