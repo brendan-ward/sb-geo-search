@@ -2,8 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-// import axios from "axios";
-// import axiosMiddleware from "redux-axios-middleware";
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from "./reducers";
 import "bulma/css/bulma.css";
