@@ -7,7 +7,6 @@ import rootReducer from "./reducers";
 import "bulma/css/bulma.css";
 import "./core.css";
 import App from "./App";
-import {ITEMS_PER_PAGE, SB_FOLDER_ID} from './config';
 
 let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 ReactDOM.render(
